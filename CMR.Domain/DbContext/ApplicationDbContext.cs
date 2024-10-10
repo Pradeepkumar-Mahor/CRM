@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CRM.UI.Data
+namespace CMR.Domain.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

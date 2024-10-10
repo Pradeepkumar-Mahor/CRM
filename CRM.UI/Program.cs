@@ -1,4 +1,4 @@
-using CRM.UI.Data;
+using CMR.Domain.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

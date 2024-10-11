@@ -2,12 +2,11 @@ using CMR.Domain;
 using CMR.Domain.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -16,17 +15,17 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-var host = Host.CreateApplicationBuilder(args).Build();
+IHost host = Host.CreateApplicationBuilder(args).Build();
 
-using (var scope = host.Services.CreateScope())
+using (IServiceScope scope = host.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-    var logger = loggerFactory.CreateLogger("app");
+    IServiceProvider services = scope.ServiceProvider;
+    ILoggerFactory loggerFactory = services.GetRequiredService<ILoggerFactory>();
+    ILogger logger = loggerFactory.CreateLogger("app");
     try
     {
-        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        UserManager<IdentityUser> userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        RoleManager<IdentityRole> roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         await DefaultRoles.SeedAsync(userManager, roleManager);
         await DefaultUsers.SeedBasicUserAsync(userManager, roleManager);
         await DefaultUsers.SeedSuperAdminAsync(userManager, roleManager);
@@ -38,18 +37,18 @@ using (var scope = host.Services.CreateScope())
         logger.LogWarning(ex, "An error occurred seeding the DB");
     }
 }
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    _ = app.UseMigrationsEndPoint();
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    _ = app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    _ = app.UseHsts();
 }
 
 app.UseHttpsRedirection();

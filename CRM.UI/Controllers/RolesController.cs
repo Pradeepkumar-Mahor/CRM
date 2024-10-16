@@ -22,8 +22,7 @@ namespace CRM.UI.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var roles = _roleManager.Roles;
-            return View(roles);
+            return View();
         }
 
         [HttpPost]

@@ -28,19 +28,19 @@
                     </h5>
                     <div class="itemContainer">
                         <div class="item">
-                            <a class=" " asp-action="Create">
-                                <i class="bx-fw bx bx-plus bx-xs bx-spin-hover"
-                                   style="font-weight:bold"></i>Create Role
+                            <a class="btn btn-link btn-sm" asp-action="Create">
+                                <i class="bx bx-plus BX-"></i>Create Role
+                                <i name='balloon' type='solid' animation='tada' rotate='90'></i>
                             </a>
                         </div>
                         <div class="item">
-                            <a class=" " asp-action="Excel">
-                                <i class="ri-file-excel-line"></i>Excel
+                            <a asp-action="Excel">
+                                Excel
                             </a>
                         </div>
                     </div>
-                    <table class="table table-hover">
-                        <thead class="table-info">
+                    <table class="table table-hover table-info">
+                        <thead>
                             <tr>
                                 <th>
                                     @Html.DisplayNameFor(Model => Model.Id)
@@ -57,9 +57,9 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@Html.DisplayFor(Modelitem => item.Id)</td>
-                                    <td>@Html.DisplayFor(Modelitem => item.Name)</td>
-                                    <td>@Html.DisplayFor(Modelitem => item.NormalizedName)</td>
+                                    <td>@Html.DisplayFor(Modelitem => item.Id)></td>
+                                    <td>@Html.DisplayFor(Modelitem => item.Name)></td>
+                                    <td>@Html.DisplayFor(Modelitem => item.NormalizedName)></td>
                                 </tr>
                             }
                         </tbody>

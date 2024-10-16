@@ -1,4 +1,26 @@
-
 .table-title {
     border-bottom: 2px solid #8f00e3;
+}
+
+.itemContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+    height: 40px;
+    border-bottom: 1px solid #e6d4f1;
+}
+
+.item {
+
+    text-align: center;
+}
+/*a {
+    color: #7b04c1!important;
+    text-decoration: none;
+}*/
+.back {
+    color: #c14f04ab !important;
+    float: right;
+    font-size: medium;
 }

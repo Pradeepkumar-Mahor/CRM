@@ -50,7 +50,7 @@ namespace CMR.Domain
         private static async Task SeedClaimsForSuperAdmin(this RoleManager<IdentityRole> roleManager)
         {
             IdentityRole? adminRole = await roleManager.FindByNameAsync("SuperAdmin");
-            await roleManager.AddPermissionClaim(adminRole, "Products");
+            await roleManager.AddPermissionClaim(role: adminRole, "Products");
         }
 
         public static async Task AddPermissionClaim(this RoleManager<IdentityRole> roleManager, IdentityRole role, string module)

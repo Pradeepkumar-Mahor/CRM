@@ -6,10 +6,10 @@ namespace CRM.UI.Models.Identity
     {
         [Required]
         [DataType(DataType.EmailAddress, ErrorMessage = "Email address is missing or invalid.")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password, ErrorMessage = "Incorrect or missing password")]
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
     }
 }

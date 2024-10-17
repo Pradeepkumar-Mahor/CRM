@@ -13,7 +13,7 @@ namespace CRM.UI.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> SignUp()
+        public IActionResult SignUp()
         {
             var model = new SignUpViewModel();
             return View(model);
@@ -45,12 +45,12 @@ namespace CRM.UI.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> SignIn()
+        public IActionResult SignIn()
         {
             return View();
         }
 
-        public async Task<IActionResult> AccessDenied()
+        public IActionResult AccessDenied()
         {
             return View();
         }

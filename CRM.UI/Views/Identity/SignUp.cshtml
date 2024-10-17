@@ -1,0 +1,57 @@
+﻿@model CRM.UI.Models.Identity.SignUpViewModel
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+@section breadcrumb {
+   @*  <nav>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">SignUp</li>
+        </ol>
+    </nav> *@
+}
+
+<section class="section d-flex justify-content-center">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title table-title">
+                        SignUp
+                        @* <a style="" class="back" asp-action="Index">
+                            <i class="bi bi-arrow-left-circle-fill"></i> Back
+                        </a> *@
+                    </h5>
+
+                    <form asp-controller="Identity" asp-action="SignUp" asp-area=""
+                            class="row g-3 p-2 needs-validation"
+                            method="post" novalidate>
+                        <div class="col-md-12">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" class="form-control" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            @* <button type="reset" class="btn btn-secondary">Reset</button> *@
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+
+}

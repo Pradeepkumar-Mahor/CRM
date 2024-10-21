@@ -16,9 +16,8 @@ namespace CRM.UI.Models.Identity
         [DataType(DataType.Password, ErrorMessage = "Incorrect or missing password")]
         public string ConfirmPassword { get; set; } = string.Empty;
 
-        [Required]
-        public bool RememberMe { get; set; }
+        public bool? RememberMe { get; set; }
 
-        public bool ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; } = string.Empty.ToString();
     }
 }

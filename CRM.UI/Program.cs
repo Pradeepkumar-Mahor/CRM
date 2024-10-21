@@ -53,7 +53,8 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.Cookie.Name = "CRMCookieName";
     option.Cookie.HttpOnly = true;
     option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-    option.LoginPath = "/Identity/Account/Login";
+    //option.LoginPath = "/Identity/Account/Login";
+    option.AccessDeniedPath = "/UsersAccount/AccessDenied";
     // ReturnUrlParameter requires
     //using Microsoft.AspNetCore.Authentication.Cookies;
     option.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;

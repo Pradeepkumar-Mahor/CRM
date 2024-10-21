@@ -29,17 +29,26 @@
                     <form asp-controller="UsersAccount" asp-action="SignUp" asp-area=""
                             class="row g-3 p-2 needs-validation"
                             method="post" novalidate>
-                        <div class="col-md-12">
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger text-danger" role="alert">
+                        </div>
+
+                        <div class="col-md-6">
                             <label asp-for="Email" class="form-label"></label>
                             <input asp-for="Email" class="form-control" required />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label asp-for="UserName" class="form-label"></label>
+                            <input asp-for="UserName" class="form-control" required />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
                             <label asp-for="Password" class="form-label"></label>
                             <input asp-for="Password" class="form-control" required />
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label asp-for="ConfirmPassword" class="form-label"></label>
                             <input asp-for="ConfirmPassword" class="form-control" required />
                             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>

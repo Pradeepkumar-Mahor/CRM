@@ -44,7 +44,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     options.Lockout.MaxFailedAccessAttempts = 3;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-    //options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.AllowedForNewUsers = true;
     options.SignIn.RequireConfirmedEmail = true;
 });
 
@@ -53,7 +53,7 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.Cookie.Name = "CRMCookieName";
     option.Cookie.HttpOnly = true;
     option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-    //option.LoginPath = "/Identity/Account/Login";
+    option.LoginPath = "/UsersAccount/SignIn";
     option.AccessDeniedPath = "/UsersAccount/AccessDenied";
     // ReturnUrlParameter requires
     //using Microsoft.AspNetCore.Authentication.Cookies;

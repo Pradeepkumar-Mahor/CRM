@@ -66,6 +66,8 @@ namespace CRM.UI.Controllers
             {
                 IdentityUser user = CreateUser();
 
+                user.NormalizedUserName = model.UserName;
+
                 await _userStore.SetUserNameAsync(user, model.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, model.Email, CancellationToken.None);
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);

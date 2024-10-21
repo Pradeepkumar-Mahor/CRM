@@ -9,6 +9,9 @@ namespace CRM.UI.Models.Identity
         public string Email { get; set; } = string.Empty;
 
         [Required]
+        public string UserName { get; set; } = string.Empty;
+
+        [Required]
         [DataType(DataType.Password, ErrorMessage = "Incorrect or missing password")]
         public string Password { get; set; } = string.Empty;
 

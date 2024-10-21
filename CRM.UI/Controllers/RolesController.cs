@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.UI.Controllers
 {
-    public class RolesController : Controller
+    public class RolesController_ : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RolesController(RoleManager<IdentityRole> roleManager)
+        public RolesController_(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
         }

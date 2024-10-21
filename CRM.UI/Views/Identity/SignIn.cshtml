@@ -1,13 +1,13 @@
-﻿@model CRM.UI.Models.Identity.SignUpViewModel
+﻿@model CRM.UI.Models.Identity.SignInViewModel
 @{
-    ViewData["Title"] = "SignUp";
+    ViewData["Title"] = "SignIn";
 }
 
 @section breadcrumb {
    @*  <nav>
         <ol class="breadcrumb">
 
-            <li class="breadcrumb-item">SignUp</li>
+            <li class="breadcrumb-item">SignIn</li>
         </ol>
     </nav> *@
 }
@@ -20,13 +20,13 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title table-title">
-                        SignUp
+                        SignIn
                         @* <a style="" class="back" asp-action="Index">
                             <i class="bi bi-arrow-left-circle-fill"></i> Back
                         </a> *@
                     </h5>
 
-                    <form asp-controller="Identity" asp-action="SignUp" asp-area=""
+                    <form asp-controller="Identity" asp-action="SignIn" asp-area=""
                             class="row g-3 p-2 needs-validation"
                             method="post" novalidate>
                         <div class="col-md-12">

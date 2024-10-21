@@ -1,72 +1,61 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity;
 @model IEnumerable<IdentityRole>
-@{
-    ViewData["Title"] = "Roles Management";
-}
-
-@section breadcrumb {
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a class="link-primary" asp-area="" asp-controller="Home" asp-action="Dashboard">
-                    <i class="bi bi-house-door"></i> <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="breadcrumb-item">Roles Management</li>
-        </ol>
-    </nav>
-}
-
-<section class="section">
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title table-title">
-                        Role list
-                    </h5>
-                    <div class="itemContainer">
-                        <div class="item">
-                            <a class=" " asp-action="Create">
-                                <i class="bx-fw bx bx-plus bx-xs bx-spin-hover"
-                                   style="font-weight:bold"></i>Create Role
+<h1>Roles</h1>
+<br />
+<form method="post" asp-action="addrole" asp-controller="roles">
+    <div class="input-group">
+        <input name="roleName" class="form-control w-25">
+        <span class="input-group-btn">
+            <button class="btn btn-info">Add New Role</button>
+        </span>
+    </div>
+</form>
+<table class="table table-striped" id="roleTable">
+    <thead>
+        <tr>
+            <th>
+                Role
+            </th>
+            <th>
+                Id
+            </th>
+            <th style="width:10%">
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>
+                    @role.Name
+                </td>
+                <td>
+                    @role.Id
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action
+                        </button>
+                        <div class="dropdown-menu shadow animated--grow-in">
+                            <a class="dropdown-item">
+                                <i class="fas fa-pencil-alt"></i> Edit
                             </a>
-                        </div>
-                        <div class="item">
-                            <a class=" " asp-action="Excel">
-                                <i class="ri-file-excel-line"></i>Excel
-                            </a>
+                            <form class="d-inline">
+                                <a class="dropdown-item"><i class="fas fa-trash-alt"></i> Delete</a>
+                            </form>
+                            @if (role.Name != "SuperAdmin")
+                            {
+                                <a style='margin-right:16px' asp-controller="Permission" asp-action="Index" asp-route-roleId="@role.Id" class="dropdown-item">
+                                    <i class="fas fa-wrench"></i> Manage Permissions
+                                </a>
+                            }
                         </div>
                     </div>
-                    <table class="table table-hover">
-                        <thead class="table-info">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(Model => Model.Id)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(Model => Model.Name)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(Model => Model.NormalizedName)
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@Html.DisplayFor(Modelitem => item.Id)</td>
-                                    <td>@Html.DisplayFor(Modelitem => item.Name)</td>
-                                    <td>@Html.DisplayFor(Modelitem => item.NormalizedName)</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

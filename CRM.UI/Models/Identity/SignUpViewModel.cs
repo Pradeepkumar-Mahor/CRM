@@ -11,5 +11,14 @@ namespace CRM.UI.Models.Identity
         [Required]
         [DataType(DataType.Password, ErrorMessage = "Incorrect or missing password")]
         public string Password { get; set; } = string.Empty;
+
+        [Required]
+        [DataType(DataType.Password, ErrorMessage = "Incorrect or missing password")]
+        public string ConfirmPassword { get; set; } = string.Empty;
+
+        [Required]
+        public bool RememberMe { get; set; }
+
+        public bool ReturnUrl { get; set; }
     }
 }

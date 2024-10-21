@@ -1,30 +1,28 @@
-﻿using CRM.UI.Areas.Identity.Pages.Account;
-using CRM.UI.Models.Identity;
+﻿using CRM.UI.Models.Identity;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace CRM.UI.Controllers
 {
-    public class IdentityController : Controller
+    [AllowAnonymous]
+    public class UsersAccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
 
-        public IdentityController(SignInManager<IdentityUser> signInManager,
-                    UserManager<IdentityUser> userManager,
-                    ILogger<LoginModel> logger)
+        public UsersAccountController(SignInManager<IdentityUser> signInManager,
+                    UserManager<IdentityUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            _logger = logger;
         }
 
         public IActionResult SignUp()
         {
             var model = new SignUpViewModel();
+
             return View(model);
         }
 
@@ -54,7 +52,7 @@ namespace CRM.UI.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> SignInAsync(string returnUrl = null)
+        public async Task<IActionResult> SignIn(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             var model = new SignInViewModel();
@@ -66,7 +64,7 @@ namespace CRM.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignInAsync(SignInViewModel model, string returnUrl = null)
+        public async Task<IActionResult> SignIn(SignInViewModel model, string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
 
@@ -80,7 +78,6 @@ namespace CRM.UI.Controllers
                         await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -89,7 +86,6 @@ namespace CRM.UI.Controllers
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
                 else

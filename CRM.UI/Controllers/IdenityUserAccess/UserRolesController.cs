@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace CRM.UI.Controllers
 {
@@ -21,6 +22,10 @@ namespace CRM.UI.Controllers
 
         public async Task<IActionResult> Index(string userId)
         {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return NotFound();
+            }
             var viewModel = new List<UserRolesViewModel>();
             var user = await _userManager.FindByIdAsync(userId);
             foreach (var role in _roleManager.Roles.ToList())
@@ -42,7 +47,8 @@ namespace CRM.UI.Controllers
             var model = new ManageUserRolesViewModel()
             {
                 UserId = userId,
-                UserRoles = viewModel
+                UserRoles = viewModel,
+                Email = user.Email
             };
             return View(model);
         }
@@ -57,6 +63,26 @@ namespace CRM.UI.Controllers
             await _signInManager.RefreshSignInAsync(currentUser);
             await CMR.Domain.DefaultUsers.SeedSuperAdminAsync(_userManager, _roleManager);
             return RedirectToAction("Index", new { userId = id });
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(IdentityRole role)
+        {
+            if (role is null)
+            {
+                return NotFound();
+            }
+            if (!_roleManager.RoleExistsAsync(roleName: role.Name).GetAwaiter().GetResult())
+            {
+                _roleManager.CreateAsync(new IdentityRole(role.Name)).GetAwaiter().GetResult();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

@@ -40,11 +40,11 @@
                         </div>
                     </div>
                     <table class="table table-hover table-bordered ">
-                        <thead class="table-info">
+                        <thead class=" ">
                             <tr>
-                                <th>
+                              @*   <th>
                                     @Html.DisplayNameFor(Model => Model.Id)
-                                </th>
+                                </th> *@
                                 <th>
                                     @Html.DisplayNameFor(Model => Model.Name)
                                 </th>
@@ -60,8 +60,8 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@Html.DisplayFor(Modelitem => item.Id)</td>
-                                    <td>@Html.DisplayFor(Modelitem => item.Name)</td>
+@*                                     <td>@Html.DisplayFor(Modelitem => item.Id)</td>
+ *@                                    <td>@Html.DisplayFor(Modelitem => item.Name)</td>
                                     <td>@Html.DisplayFor(Modelitem => item.NormalizedName)</td>
                                     <td class="text-right">
                                         <div class="btn-group">

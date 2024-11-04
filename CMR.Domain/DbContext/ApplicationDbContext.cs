@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CMR.Domain.DataClass;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CMR.Domain.Data
@@ -13,5 +14,7 @@ namespace CMR.Domain.Data
             : base(options)
         {
         }
+
+        public DbSet<ApplicationUsers> ApplicationUsers { get; set; }
     }
 }

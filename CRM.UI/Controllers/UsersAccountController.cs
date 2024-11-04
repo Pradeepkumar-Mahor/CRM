@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text.Encodings.Web;
 using System.Text;
+using CMR.Domain.DataClass;
 
 namespace CRM.UI.Controllers
 {
@@ -107,11 +108,11 @@ namespace CRM.UI.Controllers
             return View(model);
         }
 
-        private IdentityUser CreateUser()
+        private ApplicationUsers CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUsers>();
             }
             catch
             {

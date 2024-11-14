@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.DataProtection.Repositories;
+﻿using CMR.DataAccess.Repositories;
+using Microsoft.AspNetCore.DataProtection.Repositories;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -8,7 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             #region PersonPro
 
-            //services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
 
             #endregion PersonPro
 

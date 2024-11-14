@@ -3,6 +3,9 @@ using CMR.Domain.Core;
 using CMR.Domain.Data;
 using CRM.UI.Models.IdenityUserAccess;
 using CRM.UI.Service.Email;
+using DeviceDetectorNET;
+using DeviceDetectorNET.Cache;
+using MGMTApp.DataAccess;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +15,7 @@ using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Configuration;
+using WebEssentials.AspNetCore.Pwa;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +38,18 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
     .AddDefaultUI()
     .AddDefaultTokenProviders();
 builder.Services.AddRazorPages();
+
+builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+
+builder.Services.AddDataAccessService();
+
+builder.Services.AddProgressiveWebApp(new PwaOptions
+{
+    RegisterServiceWorker = true,
+    RegisterWebmanifest = false,  // (Manually register in Layout file)
+    Strategy = ServiceWorkerStrategy.NetworkFirst,
+    OfflineRoute = "Offline.html"
+});
 
 #endregion AddServices
 
@@ -100,6 +116,29 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     _ = app.UseHsts();
 }
+
+app.Use(async (context, next) =>
+{
+    var detector = new DeviceDetector(context.Request.Headers["User-Agent"].ToString());
+    detector.SetCache(new DictionaryCache());
+    detector.Parse();
+
+    if (detector.IsMobile())
+    {
+        context.Items.Remove("isMobile");
+        context.Items.Add("isMobile", true);
+    }
+    else
+    {
+        context.Items.Remove("isMobile");
+        context.Items.Add("isMobile", false);
+    }
+
+    context.Items.Remove("DeviceName");
+    context.Items.Add("DeviceName", detector.GetDeviceName());
+
+    await next();
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

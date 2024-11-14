@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CRM.UI</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+
     <partial name="_StylesPartial" />
 
     @RenderSection("Header", required: false)
@@ -12,13 +16,112 @@
     <partial name="_HeaderPartial" />
     <partial name="_MainMenuPartial" />
     <main id="main" role="main" class="main">
-
+        @* @{
+            var isMobileBool = (bool)@Context.Items["isMobile"];
+            string isMobile = "false";
+            if (isMobileBool == true)
+            {
+                isMobile = "true";
+            }
+        } *@
         @RenderSection("breadcrumb", required: false)
          @RenderBody()
     </main>
 
     <partial name="_FooterPartial" />
-
+    <!-- End Footer -->
+    <!-- Modal popup Starts -->
+    <div class="modal fade right" id="modalcontainer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!-- [ Pre-loader ] start -->
+            <div class="load-bar-modal d-none">
+                <div class="loader-bg" id="modal-loader">
+                    <div class="loader-track">
+                        <div class="loader-fill"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ Pre-loader ] End -->
+            <div class="modal-content" id="modal-content">
+            </div>
+        </div>
+    </div>
+    <!-- Modal popup Ends -->
+    <!-- Modal read only popup Starts -->
+    <div class="modal fade right" id="modalreadonlycontainer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!-- [ Pre-loader ] start -->
+            <div class="loader-bg" id="modalreadonly-loader" style="display: none;">
+                <div class="loader-track">
+                    <div class="loader-fill"></div>
+                </div>
+            </div>
+            <!-- [ Pre-loader ] End -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modaltitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card bg-light border-0">
+                        <div class="card-header app-h4 app-card-header">
+                            <p id="modalheader"></p>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div id="modal-content">
+                                        <!-- Modal content here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal read only popup Ends -->
+    <!-- Modal iFrame popup Starts -->
+    <div class="bg-light modal fade right " id="modaliframecontainer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!-- [ Pre-loader ] start -->
+            <div class="loader-bg" id="modaliframe-loader" style="display: none;">
+                <div class="loader-track">
+                    <div class="loader-fill"></div>
+                </div>
+            </div>
+            <!-- [ Pre-loader ] End -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modaltitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card  ">
+                        <div class="card-header">
+                            <h5 id="modalheader"></h5>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- Modal content here -->
+                                    <iframe id="modal-iframe" class="modal-iframe" frameborder="0" scrolling="no"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal iframe popup Ends -->
     <partial name="_ScriptsPartial" />
 
      @await RenderSectionAsync("Scripts", required: false)

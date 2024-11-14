@@ -8,6 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\SystemAdmin\Models\Person\**" />
+    <Compile Remove="Areas\SystemAdmin\Views\Person\**" />
+    <Content Remove="Areas\SystemAdmin\Models\Person\**" />
+    <Content Remove="Areas\SystemAdmin\Views\Person\**" />
+    <EmbeddedResource Remove="Areas\SystemAdmin\Models\Person\**" />
+    <EmbeddedResource Remove="Areas\SystemAdmin\Views\Person\**" />
+    <None Remove="Areas\SystemAdmin\Models\Person\**" />
+    <None Remove="Areas\SystemAdmin\Views\Person\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\SystemAdmin\Controllers\PersonController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DeviceDetector.NET.NetCore" Version="3.9.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.10" />
@@ -15,6 +31,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.85" />
+
   </ItemGroup>
 
 
@@ -44,6 +62,11 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\SystemAdmin\Models\" />
+    <Folder Include="Areas\SystemAdmin\Views\" />
   </ItemGroup>
 
 </Project>

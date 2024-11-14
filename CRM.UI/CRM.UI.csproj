@@ -65,7 +65,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\SystemAdmin\Models\" />
     <Folder Include="Areas\SystemAdmin\Views\" />
   </ItemGroup>
 

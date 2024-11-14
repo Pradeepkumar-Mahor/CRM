@@ -15,10 +15,9 @@ namespace CMR.Domain.DataClass
 
         public string? ProductDescription { get; set; }
 
-        public string? Img { get; set; }
-
         public bool ProductIsActive { get; set; } = true;
 
         public DateTime? CreatedDate { get; set; } = DateTime.Now;
+        public string? ImgUrl { get; set; }
     }
 }

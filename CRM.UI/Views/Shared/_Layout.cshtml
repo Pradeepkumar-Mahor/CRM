@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CRM.UI</title>
     <partial name="_StylesPartial" />
+
     @RenderSection("Header", required: false)
 </head>
 <body>
     <partial name="_HeaderPartial" />
     <partial name="_MainMenuPartial" />
     <main id="main" role="main" class="main">
+
         @RenderSection("breadcrumb", required: false)
-        @RenderBody()
+         @RenderBody()
     </main>
 
     <partial name="_FooterPartial" />

@@ -5,6 +5,7 @@ using CRM.UI.Models.IdenityUserAccess;
 using CRM.UI.Service.Email;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Options;
@@ -116,6 +117,13 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    //endpoints.MapAreaControllerRoute(
+    //        name: "SystemAdmin",
+    //        areaName: "SystemAdmin",
+    //        pattern: "{controller=Home}/{action=Index}/{id?}"
+    //      );
+
     endpoints.MapRazorPages();
 });
 

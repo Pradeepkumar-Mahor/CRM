@@ -9,11 +9,12 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text.Encodings.Web;
 using System.Text;
 using CMR.Domain.DataClass;
+using CRM.UI.Models;
 
 namespace CRM.UI.Controllers
 {
     [AllowAnonymous]
-    public class UsersAccountController : Controller
+    public class UsersAccountController : BaseController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
@@ -141,6 +142,7 @@ namespace CRM.UI.Controllers
 
             var model = new SignInViewModel();
             model.ReturnUrl = returnUrl;
+
             return View(model);
         }
 
@@ -159,6 +161,9 @@ namespace CRM.UI.Controllers
                         await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    Notify("Success", "Login successfully", "Notify", NotificationType.success);
+
+                    return LocalRedirect(returnUrl);
                     return LocalRedirect("/Home/");
                 }
                 if (result.RequiresTwoFactor)
@@ -172,6 +177,7 @@ namespace CRM.UI.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    Notify("Error", "Error : Invalid login attempt", "Notify", NotificationType.error);
                     return View(model);
                 }
             }

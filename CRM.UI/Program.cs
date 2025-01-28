@@ -72,6 +72,7 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     option.LoginPath = "/UsersAccount/SignIn";
     option.AccessDeniedPath = "/UsersAccount/AccessDenied";
+
     // ReturnUrlParameter requires
     //using Microsoft.AspNetCore.Authentication.Cookies;
     option.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
@@ -113,6 +114,7 @@ if (app.Environment.IsDevelopment())
 else
 {
     _ = app.UseExceptionHandler("/Home/Error");
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     _ = app.UseHsts();
 }
@@ -147,6 +149,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 app.UseAuthorization();
+
 //app.MapControllerRoute(
 //    name: "default",
 //    pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -156,6 +159,12 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    endpoints.MapAreaControllerRoute(
+       name: "default",
+       areaName: "Admin",
+       pattern: "{controller=Categories}/{action=Index}/{id?}"
+     );
 
     //endpoints.MapAreaControllerRoute(
     //        name: "SystemAdmin",

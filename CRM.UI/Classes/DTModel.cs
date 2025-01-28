@@ -189,6 +189,7 @@ namespace CRM.UI.Classes
         public enum DTOrderDir
         {
             ASC,
+
             DESC
         }
 

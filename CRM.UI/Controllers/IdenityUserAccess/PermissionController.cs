@@ -23,7 +23,7 @@ namespace CRM.UI.Controllers
 
             var allPermissions = new List<RoleClaimsViewModel>();
 
-            //allPermissions.GetPermissions(typeof(Permissions.Products), roleId);
+            allPermissions.GetPermissions(typeof(Permissions.Products), roleId);
 
             var role = await _roleManager.FindByIdAsync(roleId);
             model.RoleId = roleId;

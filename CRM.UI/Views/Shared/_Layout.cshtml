@@ -4,10 +4,51 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CRM.UI</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+
     <link rel="manifest" href="~/manifest.json" crossorigin="use-credentials">
-    <partial name="_StylesPartial" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Favicons -->
+    <link href="~/NiceAdmin/Assets/img/favicon.png">
+    <link href="~/NiceAdmin/Assets/img/apple-touch-icon.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/NiceAdmin/Assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/NiceAdmin/Assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/NiceAdmin/Assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/NiceAdmin/Assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/NiceAdmin/Assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/NiceAdmin/Assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/NiceAdmin/Assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/NiceAdmin/Assets/css/style.css" rel="stylesheet">
+
+    <!-- Custom CSS File -->
+
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/lib/Select2/select2.min.css" rel="stylesheet" asp-append-version="true" />
+
+    <link href="~/lib/datatables.net-bs5/dataTables.bootstrap5.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/bootstrap-sweetalert/sweetalert.min.css" rel="stylesheet" asp-append-version="true" />
+
+    <link href="~/lib/font-awesome/css/solid.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/font-awesome/css/regular.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/font-awesome/css/brands.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/font-awesome/css/fontawesome.min.css" rel="stylesheet" asp-append-version="true" />
+
+    <link href="~/lib/toastr.js/toastr.min.css" rel="stylesheet" asp-append-version="true" />
+
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" asp-append-version="true" />
+
+    <link href="~/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css" rel="stylesheet" asp-append-version="true" />
+
 
     @RenderSection("Header", required: false)
 </head>
@@ -24,7 +65,7 @@
             }
         } *@
         @RenderSection("breadcrumb", required: false)
-         @RenderBody()
+        @RenderBody()
     </main>
 
     <partial name="_FooterPartial" />
@@ -123,6 +164,6 @@
     <!-- Modal iframe popup Ends -->
     <partial name="_ScriptsPartial" />
 
-     @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

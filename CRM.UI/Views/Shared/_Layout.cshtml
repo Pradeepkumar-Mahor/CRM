@@ -163,7 +163,7 @@
     </div>
     <!-- Modal iframe popup Ends -->
     <partial name="_ScriptsPartial" />
-
+    @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

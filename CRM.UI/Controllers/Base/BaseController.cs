@@ -1,6 +1,6 @@
-﻿using CRM.UI.Models;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using CRM.UI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Globalization;
 
 namespace CRM.UI.Controllers
@@ -13,18 +13,21 @@ namespace CRM.UI.Controllers
             return myTI.ToTitleCase(str);
         }
 
-        public void Notify(string Title, string Message, string Provider, NotificationType notificationType)
-        {
-            var msg = new
-            {
-                message = Message,
-                title = Title,
-                icon = notificationType.ToString(),
-                type = notificationType.ToString(),
-                provider = Provider//GetProvider()
-            };
-
-            TempData["Message"] = JsonConvert.SerializeObject(msg);
-        }
+        //public void Notify(NotificationType notificationType, string Message)
+        //{
+        //    INotyfService _notifyService;
+        //    if (notificationType == NotificationType.error)
+        //    {
+        //        _notifyService.Error(Message);
+        //    }
+        //    if (notificationType == NotificationType.warning)
+        //    {
+        //        _notifyService.Warning(Message);
+        //    }
+        //    if (notificationType == NotificationType.success)
+        //    {
+        //        _notifyService.Success(Message);
+        //    }
+        //}
     }
 }

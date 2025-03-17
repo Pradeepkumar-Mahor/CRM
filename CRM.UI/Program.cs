@@ -1,3 +1,5 @@
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using CMR.Domain;
 using CMR.Domain.Core;
 using CMR.Domain.Data;
@@ -83,6 +85,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddNotyf(config =>
+    {
+        config.DurationInSeconds = 10;
+        config.IsDismissable = true;
+        config.Position = NotyfPosition.TopRight;
+        config.HasRippleEffect = true;
+    });
 WebApplication app = builder.Build();
 
 using (IServiceScope scope = app.Services.CreateScope())
@@ -141,7 +150,7 @@ app.Use(async (context, next) =>
 
     await next();
 });
-
+app.UseNotyf();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

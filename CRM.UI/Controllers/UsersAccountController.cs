@@ -10,6 +10,8 @@ using System.Text.Encodings.Web;
 using System.Text;
 using CMR.Domain.DataClass;
 using CRM.UI.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using AspNetCoreHero.ToastNotification.Notyf;
 
 namespace CRM.UI.Controllers
 {
@@ -17,13 +19,20 @@ namespace CRM.UI.Controllers
     public class UsersAccountController : BaseController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+
         private readonly UserManager<IdentityUser> _userManager;
+
         private readonly IUserStore<IdentityUser> _userStore;
+
         private readonly IUserEmailStore<IdentityUser> _emailStore;
+
         private readonly ILogger<RegisterModel> _logger;
+
         private readonly IEmailSender _emailSender;
 
         private readonly ILogger<LoginModel> _loggerLoginModel;
+
+        public INotyfService _notifyService { get; }
 
         public UsersAccountController(
              UserManager<IdentityUser> userManager,
@@ -31,7 +40,7 @@ namespace CRM.UI.Controllers
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-             ILogger<LoginModel> loggerLoginModel
+             ILogger<LoginModel> loggerLoginModel, INotyfService notifyService
             )
         {
             _userManager = userManager;
@@ -41,6 +50,7 @@ namespace CRM.UI.Controllers
             _logger = logger;
             _emailSender = emailSender;
             _loggerLoginModel = loggerLoginModel;
+            _notifyService = notifyService;
         }
 
         private IUserEmailStore<IdentityUser> GetEmailStore()
@@ -161,10 +171,8 @@ namespace CRM.UI.Controllers
                         await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    Notify("Success", "Login successfully", "Notify", NotificationType.success);
-
+                    _notifyService.Success("Login successfully");
                     return LocalRedirect(returnUrl);
-                    return LocalRedirect("/Home/");
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -177,7 +185,7 @@ namespace CRM.UI.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    Notify("Error", "Error : Invalid login attempt", "Notify", NotificationType.error);
+                    _notifyService.Error("Invalid login attempt");
                     return View(model);
                 }
             }

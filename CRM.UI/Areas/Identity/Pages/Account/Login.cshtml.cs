@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using AspNetCoreHero.ToastNotification.Abstractions;
 using CMR.Domain.DataClass;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -17,10 +18,13 @@ namespace CRM.UI.Areas.Identity.Pages.Account
 
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<ApplicationUsers> signInManager, ILogger<LoginModel> logger)
+        public INotyfService _notifyService { get; }
+
+        public LoginModel(SignInManager<ApplicationUsers> signInManager, ILogger<LoginModel> logger, INotyfService notifyService)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _notifyService = notifyService;
         }
 
         /// <summary>
@@ -110,6 +114,11 @@ namespace CRM.UI.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    _notifyService.Success("This is a Success Notification");
+
+                    _notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
+                    _notifyService.Custom("Custom Notification - closes in 5 seconds.", 10, "#135224", "fa fa-gear");
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -119,6 +128,7 @@ namespace CRM.UI.Areas.Identity.Pages.Account
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
+                    _notifyService.Error("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
                 else

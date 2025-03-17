@@ -1,7 +1,6 @@
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 using CMR.Domain;
-using CMR.Domain.Core;
 using CMR.Domain.Data;
 using CRM.UI.Models.IdenityUserAccess;
 using CRM.UI.Service.Email;
@@ -10,14 +9,13 @@ using DeviceDetectorNET.Cache;
 using MGMTApp.DataAccess;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using PushNotifications.Server.AspNetCore;
 using System.Configuration;
 using WebEssentials.AspNetCore.Pwa;
+
+using PushNotifications.Server.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -84,7 +82,7 @@ builder.Services.ConfigureApplicationCookie(option =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddPushNotifications();
 builder.Services.AddNotyf(config =>
     {
         config.DurationInSeconds = 10;

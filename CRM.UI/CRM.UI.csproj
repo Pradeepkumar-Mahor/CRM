@@ -35,6 +35,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="PushNotifications.Server.AspNetCore" Version="1.3.35" />
     <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.85" />
 
   </ItemGroup>
